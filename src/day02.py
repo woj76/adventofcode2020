@@ -18,7 +18,7 @@ for d in data:
     if part2:
         letter1 = password[bounds[0]-1]
         letter2 = password[bounds[1]-1]
-        if (letter1 == letter or letter2 == letter) and letter1 != letter2:
+        if (letter1 == letter) ^ (letter2 == letter):
             r += 1
     else:
         occurences = password.count(letter)
