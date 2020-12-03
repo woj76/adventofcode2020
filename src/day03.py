@@ -14,8 +14,7 @@ lx = len(data[0])
 
 slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)] if part2 else [(3, 1)]
 
-for s in slopes:
-	dx, dy = s
+for dx, dy in slopes:
 	x = y = trees = 0
 	while y < ly:
 		if data[y][x] == '#':
