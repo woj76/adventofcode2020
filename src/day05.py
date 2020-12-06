@@ -20,15 +20,15 @@ for d in data:
 	allseats.append(row*8 + seat)
 
 allseats.sort()
-maxid = allseats[-1]
 
 if part2:
-	for i in range(allseats[0]+1, maxid):
-		if not i in allseats:
-			r = i
+	for i in range(len(allseats)):
+		nextseat = allseats[i] + 1
+		if allseats[i+1] != nextseat:
+			r = nextseat
 			break
 else:
-	r = maxid
+	r = allseats[-1]
 
 repres(r, part2)
 
