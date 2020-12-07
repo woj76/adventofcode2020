@@ -12,13 +12,13 @@ r  = 0
 bag_deps = {}
 
 for d in data:
-        dep = d.split(" contain ")
-        l = [x.strip() for x in dep[1][:-1].split(',')]
-        bag_deps[dep[0].strip()] = [(x[2:], int(x[:1])) for x in l if x != "no other"]
+	dep = d.split(" contain ")
+	l = [x.strip() for x in dep[1][:-1].split(',')]
+	bag_deps[dep[0].strip()] = [(x[2:], int(x[:1])) for x in l if x != "no other"]
 
 my_bag = 'shiny gold'
 
-## Imperative version for part 1
+## Imperative / BFS version for part 1
 #for k in bag_deps.keys():
 #	i = 0
 #	l = [x[0] for x in bag_deps[k]]
@@ -40,7 +40,9 @@ def find_bags(bag):
 		if part2:
 			res += n * (find_bags(b)+1)
 		else:
-			res = max(res, find_bags(b))
+			res = find_bags(b)
+			if res == 1:
+				break
 	return res
 
 if part2:
