@@ -12,7 +12,7 @@ l = len(data)
 
 for i in range(25, l):
 	v = data[i]
-	sdata = data[:i]
+	sdata = data[i-25:i]
 	sums = [ True for x in sdata for y in sdata if x != y and x + y == v]
 	if len(sums) == 0:
 		r = v
