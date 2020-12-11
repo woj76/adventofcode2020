@@ -18,20 +18,23 @@ while True:
 	for y in range(ys):
 		for x in range(xs):
 			n = 0
+			if data[y][x] == '.':
+				continue
 			for (dx, dy) in dirs:
-				dist = 1
+				nx, ny = x, y
 				while True:
-					nx, ny = x + dist*dx, y + dist*dy
+					nx += dx
+					ny += dy
 					if 0 <= nx < xs and 0 <= ny < ys:
-						oc = 1 if data[y][x] != '.' and data[ny][nx] == '#' else 0
-						n += oc
-						if oc == 1 or data[ny][nx] == 'L':
+						if data[ny][nx] == '#':
+							n += 1
+							break
+						elif data[ny][nx] == 'L':
 							break
 					else:
 						break
-					if not part2 and dist == 1:
+					if not part2:
 						break
-					dist += 1
 			neighbours[y][x] = n
 	still = True
 	occupied = 0
