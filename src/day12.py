@@ -36,9 +36,7 @@ for d in data:
 		if dir == 'L':
 			n = -n
 		for i in range(n % 4):
-			t = wx
-			wx = wy
-			wy = -t
+			wx, wy = wy, -wx
 
 r = abs(x) + abs(y)
 
