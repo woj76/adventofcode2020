@@ -26,5 +26,3 @@ while turn < (30000000 if part2 else 2020):
 	turn += 1
 
 repres(tosay, part2)
-
-
