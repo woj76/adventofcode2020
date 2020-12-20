@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
-import math
+from math import sqrt
 from aoc import repres
+from copy import deepcopy
 
 file = open("../data/day20.txt", "rt")
 data = [x.strip() for x in file.read().strip().split('\n\n')]
@@ -108,7 +109,7 @@ for i,t in tiles.items():
 	tiles[i] = remove_border(t)
 
 x = y = 0
-picture_size = int(math.sqrt(len(tiles)))*len(tiles[next_tile])
+picture_size = int(sqrt(len(tiles)))*len(tiles[next_tile])
 picture = [[' ']*picture_size for _ in range(picture_size)]
 
 while len(tiles) > 0:
@@ -133,24 +134,32 @@ monster = ["                  # ", "#    ##    ##    ###", " #  #  #  #  #  #   
 monster_x = len(monster[0])
 monster_y = len(monster)
 
-picture = fliph(picture)
-#picture = rotate(picture)
-#picture = rotate(picture)
-#picture = rotate(picture)
+for tr in range(8):
+	old_picture = deepcopy(picture)
+	hflip = tr > 3
+	rotate_num = tr % 4
+	if hflip:
+		picture = fliph(picture)
+	for _ in range(rotate_num):
+		picture = rotate(picture)
 
-for x in range(0, picture_size - monster_x):
-	for y in range(0, picture_size - monster_y):
-		monster_found = True
-		for mx in range(monster_x):
-			for my in range(monster_y):
-				if monster[my][mx] == '#' and picture[y+my][x+mx] != '#':
-					monster_found = False
-		if monster_found:
+	monsters = 0
+	for x in range(0, picture_size - monster_x):
+		for y in range(0, picture_size - monster_y):
+			monster_found = True
 			for mx in range(monster_x):
 				for my in range(monster_y):
-					if monster[my][mx] == '#':
-						picture[y+my][x+mx] = 'O'
-
-r = sum([r.count('#') for r in picture])
+					if monster[my][mx] == '#' and picture[y+my][x+mx] == '.':
+						monster_found = False
+			if monster_found:
+				monsters += 1
+				for mx in range(monster_x):
+					for my in range(monster_y):
+						if monster[my][mx] == '#':
+							picture[y+my][x+mx] = 'O'
+	if monsters > 0:
+		r = sum([x.count('#') for x in picture])
+		break
+	picture = old_picture
 
 repres(r, part2)
