@@ -14,17 +14,15 @@ player1 = [int(x) for x in player1[1:]]
 player2 = [int(x) for x in player2[1:]]
 
 def play(deck1, deck2):
-	reps1 = []
-	reps2 = []
-	while deck1 != [] and deck2 != []:
+	reps = []
+	while deck1 and deck2:
 		if part2:
-			if deck1 in reps1 and deck2 in reps2:
+			if deck1 in reps and deck2 in reps:
 				return 1, deck1
-			reps1.append(deck1)
-			reps2.append(deck2)
-		p1,p2 = deck1[0], deck2[0]
-		deck1 = deck1[1:]
-		deck2 = deck2[1:]
+			reps.append(deck1)
+			reps.append(deck2)
+		p1, p2 = deck1[0], deck2[0]
+		deck1, deck2 = deck1[1:], deck2[1:]
 		if part2 and len(deck1) >= p1 and len(deck2) >= p2:
 			wn, _ = play(deck1[:p1], deck2[:p2])
 		else:

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/snap/bin/pypy3
 
 from aoc import repres
 file = open("../data/day21.txt", "rt")
